@@ -1,65 +1,94 @@
-import Image from "next/image";
+// app/page.tsx
+import Navbar from '@/components/Navbar';
+import Experience from '@/components/Experience';
+import Skills from '@/components/Skills';
+import Projects from '@/components/Projects';
+import { personalInfo } from '@/data/content';
+import { Github, Linkedin, Mail, MapPin, Download } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="relative bg-[#050505] text-[#f2f2f2]">
+      
+      <Navbar />
+
+      {/* 1. HOME SECTION */}
+      <section id="home" className="min-h-screen flex flex-col justify-center px-8 max-w-7xl mx-auto pt-20">
+        <h1 className="text-[10vw] leading-[0.9] font-black tracking-tighter uppercase mb-8">
+          {personalInfo.name.split(' ')[0]} <br />
+          <span className="text-accent italic">{personalInfo.name.split(' ')[1]}</span>.
+        </h1>
+        <p className="text-3xl md:text-4xl text-gray-300 max-w-3xl font-medium tracking-tight leading-snug">
+          {personalInfo.role}. <br />
+          <span className="text-gray-500">Turning complex data into strategic insights.</span>
+        </p>
+        
+        <div className="flex gap-6 mt-12">
+          <a href={personalInfo.linkedin} target="_blank" className="p-4 bg-white/10 rounded-full hover:bg-accent hover:text-black transition-all">
+            <Linkedin size={28} />
+          </a>
+          <a href={personalInfo.github} target="_blank" className="p-4 bg-white/10 rounded-full hover:bg-accent hover:text-black transition-all">
+            <Github size={28} />
+          </a>
+          <a href="/resume.pdf" target="_blank" className="px-8 py-4 bg-white/10 rounded-full font-bold flex items-center gap-2 hover:bg-white hover:text-black transition-all">
+            <Download size={20} /> Resume
+          </a>
+        </div>
+      </section>
+
+      {/* 2. ABOUT ME SECTION */}
+      <section id="about" className="py-32 px-8 border-t border-white/10">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-sm uppercase tracking-[0.3em] text-accent mb-12 font-bold">About Me</h2>
+          <p className="text-3xl md:text-5xl font-medium leading-tight text-white mb-12">
+            "{personalInfo.bio}"
           </p>
+          <div className="grid md:grid-cols-2 gap-8 text-xl text-gray-400">
+            <div className="flex items-center gap-3">
+              <MapPin className="text-accent" /> {personalInfo.location}
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-accent text-2xl">🎓</span> B.Tech CSE (AI & ML) • 8.90 SGPA
+            </div>
+          </div>
+          <div className="mt-16">
+             <Skills />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* 3. PROJECTS SECTION */}
+      <div id="projects">
+        <Projects />
+      </div>
+
+      {/* 4. EXPERIENCE SECTION */}
+      <div id="experience">
+        <Experience />
+      </div>
+
+      {/* 5. CONTACT SECTION */}
+      <footer id="contact" className="py-40 px-8 border-t border-white/10 text-center bg-white/[0.02]">
+        <h2 className="text-6xl md:text-8xl font-black uppercase mb-16 tracking-tighter">
+          Let's <span className="text-accent">Talk</span>.
+        </h2>
+        
+        <a 
+          href={`mailto:${personalInfo.email}`} 
+          className="inline-block px-12 py-6 bg-accent text-black font-black text-2xl rounded-full hover:scale-105 transition-transform"
+        >
+          Send an Email
+        </a>
+        
+        <div className="flex justify-center gap-12 mt-20 text-base font-bold text-gray-500 uppercase tracking-widest">
+          <a href={personalInfo.linkedin} className="hover:text-white transition-colors">LinkedIn</a>
+          <a href={personalInfo.github} className="hover:text-white transition-colors">GitHub</a>
+          <a href="tel:+918284000103" className="hover:text-white transition-colors">+91 82840 00103</a>
         </div>
-      </main>
-    </div>
+        
+        <p className="mt-16 text-sm text-gray-700">© 2025 Navneet Kaur. Built with Next.js & Tailwind.</p>
+      </footer>
+
+    </main>
   );
 }

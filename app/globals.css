@@ -1,26 +1,22 @@
+/* app/global.css */
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-background: #050505;
+  --color-foreground: #f2f2f2; /* Brighter text for visibility */
+  --color-accent: #ffb300;
+  --font-sans: "Inter", system-ui, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply antialiased min-h-screen;
+  font-size: 18px; /* Increased base size from 16px */
+  line-height: 1.6;
+}
+
+/* Smooth Scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
 }
