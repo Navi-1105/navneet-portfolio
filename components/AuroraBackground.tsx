@@ -1,9 +1,14 @@
-// AuroraBackground.tsx
+// components/AuroraBackground.tsx
 export default function AuroraBackground() {
   const bubbles = [
-    { size: 500, left: -5, top: 60, delay: 0 },    // Bottom Left bubble
-    { size: 450, left: 85, top: 20, delay: 1.5 },  // Top Right bubble
-    { size: 400, left: 75, top: 80, delay: 3 },    // Bottom Right bubble
+    // Bottom Left - Large, mostly off-screen
+    { size: 600, left: -10, top: 70, delay: 0 }, 
+    
+    // Top Right - Medium, floating near header
+    { size: 400, left: 85, top: 10, delay: 1.5 },
+    
+    // Bottom Right - Medium-Large
+    { size: 500, left: 80, top: 80, delay: 3 },
   ];
 
   return (
@@ -20,7 +25,7 @@ export default function AuroraBackground() {
               left: `${b.left}%`,
               top: `${b.top}%`,
               animationDelay: `${b.delay}s`,
-              animationDuration: `${12 + i * 2}s`,
+              animationDuration: `${15 + i * 2}s`, // Slower movement for glass effect
             }}
           />
         ))}
