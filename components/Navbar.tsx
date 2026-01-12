@@ -18,7 +18,7 @@ export default function Navbar() {
         animate={{ opacity: 1 }} 
         className="text-2xl font-black tracking-tighter uppercase text-white"
       >
-        NAVNEET.
+        NAVNEET
       </motion.span>
       
       {/* Desktop Navigation */}

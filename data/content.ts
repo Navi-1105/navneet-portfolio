@@ -2,7 +2,7 @@
 
 export const personalInfo = {
   name: "Navneet Kaur",
-  role: "Data Analyst | Full-Stack Developer",
+  role: " Full-Stack Developer| ML Enthusiast",
   bio: "I’m a full-stack developer and data science practitioner who builds end-to-end systems — from robust backend APIs to real-time dashboards. I focus on practical engineering: clean architecture, performance, and extracting real insight from data.",
   email: "somalnavneetkaur@gmail.com",
   linkedin: "https://www.linkedin.com/in/navneet-kaur-3697a6290/",
@@ -11,8 +11,8 @@ export const personalInfo = {
 };
 
 export const skills = {
-  "Languages": ["Java (DSA)", "Python", "SQL", "C++", "JavaScript"],
-  "Frameworks": ["Spring Boot", "React.js", "Express.js", "Node.js", "Flask"],
+  "Languages": ["Java (Basics)", "Python", "SQL", "C++(DSA)", "JavaScript"],
+  "Frameworks": [, "React.js", "Express.js", "Node.js", "Flask"],
   "Data & AI": ["Pandas", "NumPy", "Scikit-Learn", "NLP", "Generative AI", "OCR"],
   "Tools": ["Git", "GitHub", "Tableau", "Streamlit", "Postman", "Azure AI", "MySQL"]
 };
