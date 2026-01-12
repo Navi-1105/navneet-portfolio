@@ -5,7 +5,7 @@
 ========================= */
 
 :root {
-  --bg: #05070d;
+  --bg: #03050a;
   --fg: #f7f5f0;
 }
 
@@ -28,23 +28,13 @@ body {
 
 .wavy-bg {
   position: fixed;
-  inset: -25%;
+  inset: 0;
   z-index: 0;
-  background:
-    radial-gradient(55% 60% at 50% 45%, rgba(10, 14, 28, 0.9), transparent 70%),
-    radial-gradient(45% 50% at 20% 20%, rgba(70, 110, 160, 0.25), transparent 60%),
-    radial-gradient(45% 50% at 80% 30%, rgba(100, 80, 160, 0.25), transparent 60%);
-  filter: blur(50px);
-  animation: slowDrift 20s ease-in-out infinite alternate;
-}
-
-@keyframes slowDrift {
-  from { transform: translate(-4%, -2%) scale(1.03); }
-  to { transform: translate(5%, 4%) scale(1.06); }
+  background: radial-gradient(circle at center, #0a0c14 0%, #03050a 100%);
 }
 
 /* =========================
-   IRIDESCENT AURA BUBBLES (EXACT MATCH)
+   BUBBLES CONTAINER
 ========================= */
 
 .bubbles-container {
@@ -55,101 +45,67 @@ body {
   overflow: visible;
 }
 
-/* Core iridescent bubble - translucent with rainbow edges */
+/* =========================
+   IRIDESCENT BUBBLE - GLASSY EFFECT
+========================= */
+
 .iridescent-bubble {
   position: absolute;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  border-radius: 48% 52% 50% 50% / 50% 48% 52% 50%;
   
-  /* Organic, flattened appearance - not perfectly round */
-  border-radius: 45% 55% 50% 50% / 50% 45% 55% 50%;
+  /* The "Secret Sauce": A mix of dark inner body and bright edges */
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(10, 15, 30, 0.8) 40%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
   
-  /* Dark, reflective interior with translucent overlay */
-  background:
-    radial-gradient(
-      circle at 30% 25%,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(10, 5, 20, 0.7) 25%,
-      rgba(20, 10, 40, 0.65) 50%,
-      rgba(5, 5, 15, 0.75) 75%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
+  /* Multi-layered glow to match the rainbow edges */
+  box-shadow: 
+    inset 0 0 40px rgba(255, 255, 255, 0.05),
+    0 0 60px rgba(100, 200, 255, 0.2),
+    0 0 100px rgba(180, 100, 255, 0.15),
+    inset 0 10px 20px rgba(255, 255, 255, 0.2);
   
-  /* Glowing rainbow edges - iridescent halo effect */
-  box-shadow:
-    0 0 100px rgba(138, 43, 226, 0.6),
-    0 0 150px rgba(75, 0, 130, 0.5),
-    0 0 200px rgba(0, 100, 200, 0.4),
-    0 0 250px rgba(0, 150, 255, 0.3),
-    inset 0 0 80px rgba(0, 200, 200, 0.2),
-    inset 0 0 120px rgba(255, 100, 200, 0.15);
-  
-  filter: blur(1px);
+  backdrop-filter: blur(10px);
   animation: bubbleFloat ease-in-out infinite;
   will-change: transform;
 }
 
-/* Iridescent rainbow sheen overlay */
+/* Iridescent rainbow rim */
 .iridescent-bubble::before {
   content: "";
   position: absolute;
-  inset: -5%;
+  inset: 0;
   border-radius: inherit;
-  background: 
-    conic-gradient(
-      from 0deg at 50% 50%,
-      rgba(138, 43, 226, 0.4) 0deg,
-      rgba(75, 0, 130, 0.35) 60deg,
-      rgba(0, 100, 200, 0.4) 120deg,
-      rgba(0, 150, 255, 0.35) 180deg,
-      rgba(0, 200, 200, 0.4) 240deg,
-      rgba(255, 100, 200, 0.35) 300deg,
-      rgba(255, 150, 100, 0.3) 330deg,
-      rgba(138, 43, 226, 0.4) 360deg
-    );
-  mask: radial-gradient(
-    circle at center,
-    transparent 40%,
-    rgba(0, 0, 0, 0.8) 60%,
-    rgba(0, 0, 0, 1) 100%
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    rgba(100, 255, 255, 0.5),
+    rgba(200, 100, 255, 0.4),
+    rgba(255, 100, 150, 0.4),
+    rgba(100, 200, 255, 0.5)
   );
-  -webkit-mask: radial-gradient(
-    circle at center,
-    transparent 40%,
-    rgba(0, 0, 0, 0.8) 60%,
-    rgba(0, 0, 0, 1) 100%
-  );
-  opacity: 0.9;
-  mix-blend-mode: overlay;
-}
-
-/* Glossy highlight for 3D effect */
-.iridescent-bubble::after {
-  content: "";
-  position: absolute;
-  inset: 15%;
-  border-radius: 50%;
-  background: 
-    radial-gradient(
-      ellipse at 35% 30%,
-      rgba(255, 255, 255, 0.6) 0%,
-      rgba(255, 255, 255, 0.3) 20%,
-      rgba(200, 220, 255, 0.2) 40%,
-      transparent 70%
-    );
-  opacity: 0.8;
-  mix-blend-mode: screen;
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  filter: blur(1px);
 }
 
 /* Floating animation - organic, fluid movement */
 @keyframes bubbleFloat {
   0% {
     transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1) rotate(0deg);
-    border-radius: 45% 55% 50% 50% / 50% 45% 55% 50%;
+    border-radius: 48% 52% 50% 50% / 50% 48% 52% 50%;
   }
   25% {
-    transform: translate(-50%, -50%) translate3d(15px, -20px, 0) scale(1.05) rotate(2deg);
+    transform: translate(-50%, -50%) translate3d(15px, -20px, 0) scale(1.02) rotate(2deg);
     border-radius: 50% 45% 55% 50% / 45% 50% 50% 55%;
   }
   50% {
@@ -162,7 +118,7 @@ body {
   }
   100% {
     transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1) rotate(0deg);
-    border-radius: 45% 55% 50% 50% / 50% 45% 55% 50%;
+    border-radius: 48% 52% 50% 50% / 50% 48% 52% 50%;
   }
 }
 
@@ -182,3 +138,4 @@ body {
   body { cursor: auto; }
   .custom-cursor { display: none; }
 }
+
