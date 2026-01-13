@@ -19,7 +19,8 @@ export default function Skills() {
   return (
     <section id="skills" className="py-32 px-8 border-t border-white/10 relative overflow-hidden">
       
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] -z-10" />
+      {/* Updated Glow: Warm Amber instead of Blue */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[100px] -z-10" />
 
       <div className="max-w-7xl mx-auto">
         {/* FIX 1: Reduced from 8xl to 6xl. Still big, but not overwhelming. */}
@@ -43,7 +44,8 @@ export default function Skills() {
             >
               {/* FIX 2: Reduced sub-headings to 3xl/4xl. Refined the gold bar height (h-8). */}
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-4">
-                <span className="w-1.5 h-8 md:h-10 bg-accent rounded-sm inline-block"></span>
+                {/* Gold Bar with Shadow */}
+                <span className="w-1.5 h-8 md:h-10 bg-accent rounded-sm inline-block shadow-[0_0_15px_rgba(251,191,36,0.5)]"></span>
                 {category}
               </h3>
 
@@ -54,12 +56,14 @@ export default function Skills() {
                     variants={itemVariants}
                     whileHover={{ 
                       scale: 1.05, 
-                      backgroundColor: "rgba(255, 179, 0, 1)", 
-                      color: "#000",
-                      borderColor: "transparent"
+                      // GOLDEN GLASS EFFECT
+                      backgroundColor: "rgba(255, 220, 150, 0.1)", 
+                      color: "#fff",
+                      borderColor: "rgba(251, 191, 36, 0.6)", // Gold border
+                      boxShadow: "0 0 20px rgba(251, 191, 36, 0.2), inset 0 0 10px rgba(251, 191, 36, 0.1)"
                     }}
                     // FIX 3: Made buttons 'text-lg' and increased padding (py-3 px-5) to look substantial
-                    className="px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-base md:text-lg font-medium text-gray-300 cursor-default transition-colors duration-300 backdrop-blur-sm"
+                    className="px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-base md:text-lg font-medium text-gray-300 cursor-default transition-all duration-300 backdrop-blur-md"
                   >
                     {skill}
                   </motion.span>

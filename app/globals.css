@@ -37,7 +37,7 @@ body {
 }
 
 /* =========================
-   IRIDESCENT GLASS BUBBLES (EXACT MATCH)
+   IRIDESCENT GLASS BUBBLES (COLORFUL OIL-SLICK)
 ========================= */
 
 .bubbles-container {
@@ -52,50 +52,46 @@ body {
   transform: translate(-50%, -50%);
   pointer-events: none;
   
-  /* Fluid, organic shape base */
+  /* Fluid shape */
   border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
   
-  /* TRANSPARENCY IS KEY: Almost clear background */
-  background: rgba(255, 255, 255, 0.01);
+  /* Transparent interior with very subtle dark fill */
+  background: rgba(0, 0, 0, 0.2);
   
-  /* THE SOAP BUBBLE EFFECT: Layered shadows create the rim */
+  /* THE COLOR SPECTRUM: Creating the multi-colored inner glow */
   box-shadow: 
-    /* 1. Thin white-ish outer edge definition */
-    0 0 2px rgba(255, 255, 255, 0.1),
-    /* 2. Inner Purple Glow (Top Left) */
-    inset 10px 10px 40px rgba(140, 50, 255, 0.3),
-    /* 3. Inner Cyan/Teal Glow (Bottom Right) */
-    inset -10px -10px 40px rgba(50, 200, 255, 0.3),
-    /* 4. Deep soft shadow to give it 3D volume without filling it */
-    inset 0 0 100px rgba(0, 0, 0, 0.8);
+    /* 1. Sharp outer highlight */
+    0 0 1px rgba(255, 255, 255, 0.4),
+    /* 2. Top-Left: Pink/Purple Glow */
+    inset 20px 20px 60px rgba(235, 50, 200, 0.5),
+    /* 3. Bottom-Right: Cyan/Green Glow (The "Oil" look) */
+    inset -10px -20px 60px rgba(0, 255, 200, 0.5),
+    /* 4. Deep black depth */
+    inset 0 0 80px rgba(0, 0, 0, 0.9);
 
-  /* Glass distortion effect */
-  backdrop-filter: blur(2px);
-  
-  /* Organic morphing animation */
-  animation: fluidFloat 12s ease-in-out infinite alternate;
+  backdrop-filter: blur(3px);
+  animation: fluidFloat 18s ease-in-out infinite alternate;
   will-change: transform, border-radius;
 }
 
-/* The Rainbow "Oil Slick" Rim */
+/* The Rainbow Rim (The key to the reference look) */
 .iridescent-bubble::before {
   content: "";
   position: absolute;
-  inset: -1px; /* Slightly larger than the bubble */
+  inset: -1px;
   border-radius: inherit;
-  padding: 1px; /* Border width */
+  padding: 2px; /* Thicker rim for more color visibility */
   
-  /* Conic gradient creates the rainbow swirl on edges */
+  /* EXACT SPECTRUM MATCH: Cyan -> Green -> Purple -> Pink */
   background: conic-gradient(
-    from 0deg, 
-    transparent 0%, 
-    rgba(140, 50, 255, 0.5) 25%, /* Purple */
-    rgba(50, 200, 255, 0.5) 50%, /* Cyan */
-    rgba(255, 100, 200, 0.5) 75%, /* Pink */
-    transparent 100%
+    from 180deg, 
+    transparent 10%, 
+    rgba(0, 255, 200, 0.9) 30%,  /* Bright Cyan/Green */
+    rgba(150, 50, 255, 0.9) 60%, /* Deep Purple */
+    rgba(255, 50, 150, 0.9) 80%, /* Hot Pink */
+    transparent 95%
   );
   
-  /* Masking trick to show gradient only as a border */
   -webkit-mask: 
     linear-gradient(#fff 0 0) content-box, 
     linear-gradient(#fff 0 0);
@@ -105,11 +101,11 @@ body {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   
-  filter: blur(8px); /* Soften the rainbow colors */
-  opacity: 0.8;
+  filter: blur(6px); /* Blends the rainbow segments */
+  opacity: 1; 
 }
 
-/* The Sharp White Glossy Reflection (Crucial for the "Wet" look) */
+/* Glossy White Reflection (Glass Surface) */
 .iridescent-bubble::after {
   content: "";
   position: absolute;
@@ -119,12 +115,16 @@ body {
   height: 12%;
   border-radius: 50%;
   
-  /* Sharp white fading to transparent */
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+  background: radial-gradient(
+    ellipse at center, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(255, 255, 255, 0.4) 40%, 
+    transparent 70%
+  );
   
-  filter: blur(3px);
+  filter: blur(2px);
   transform: rotate(-45deg);
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 @keyframes fluidFloat {
@@ -134,11 +134,11 @@ body {
   }
   33% { 
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; 
-    transform: translate(-50%, -55%) rotate(5deg); 
+    transform: translate(-50%, -52%) rotate(5deg); 
   }
   66% { 
     border-radius: 50% 50% 60% 40% / 40% 60% 50% 50%; 
-    transform: translate(-50%, -45%) rotate(-5deg); 
+    transform: translate(-50%, -48%) rotate(-5deg); 
   }
   100% { 
     border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
@@ -178,5 +178,57 @@ body {
 @media (pointer: coarse) {
   body { cursor: auto; }
   .custom-cursor { display: none; }
+}
+
+/* =========================
+   PREMIUM ANIMATED GRADIENTS
+========================= */
+
+@layer utilities {
+  /* 1. THE ANIMATION KEYFRAMES */
+  @keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* 2. TEXT ACCENT: Animated Holographic Gradient */
+  .text-accent {
+    color: transparent;
+    /* The Premium Palette: Cyan -> Violet -> Magenta -> Cyan */
+    background: linear-gradient(
+      300deg,
+      #22d3ee, /* Cyan */
+      #b198ec, /* Violet */
+      #c4b8c5, /* Fuchsia */
+      #7fd7e4  /* Loop back to Cyan */
+    );
+    background-size: 300% 300%; /* Zooms in to make the gradient smooth */
+    background-clip: text;
+    -webkit-background-clip: text;
+    
+    /* Smooth movement */
+    animation: gradient-flow 6s ease infinite;
+    
+    /* Glow effect */
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.3));
+  }
+
+  /* 3. BUTTONS & DOTS: Matching Glassy Animation */
+  .bg-accent {
+    background: linear-gradient(
+      300deg,
+      rgba(34, 211, 238, 0.8), 
+      rgba(139, 92, 246, 0.8),
+      rgba(217, 70, 239, 0.8)
+    );
+    background-size: 300% 300%;
+    animation: gradient-flow 6s ease infinite;
+    
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    backdrop-filter: blur(5px);
+  }
 }
 

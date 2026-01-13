@@ -25,12 +25,12 @@ export default function Navbar() {
       <ul className="hidden md:flex gap-10">
         {links.map((link) => (
           <li key={link.name}>
-            <a 
-              href={link.href} 
-              className="text-sm font-bold uppercase tracking-widest text-gray-300 hover:text-[#ffb300] transition-colors"
-            >
-              {link.name}
-            </a>
+              <a 
+                href={link.href} 
+                className="text-sm font-bold uppercase tracking-widest text-gray-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-cyan-400 hover:via-purple-500 hover:to-pink-500 transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]"
+              >
+                {link.name}
+              </a>
           </li>
         ))}
       </ul>
