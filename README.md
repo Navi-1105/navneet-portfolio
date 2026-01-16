@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+
+# ⚡️ Navneet Kaur – Developer Portfolio
+
+> **Full-Stack Developer | ML Enthusiast**  
+> *“Turning complex data into strategic insights.”*
+
+[![Live Demo](https://img.shields.io/badge/Live_Site-Visit_Portfolio-22d3ee?style=for-the-badge&logo=netlify)](https://navneet-kaur-somal-portfolio.netlify.app)
+[![Netlify Status](https://img.shields.io/badge/Deployed%20On-Netlify-00C7B7?style=for-the-badge&logo=netlify)](https://navneet-kaur-somal-portfolio.netlify.app)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+
+---
+
+## 📖 About The Project
+
+This isn’t just a static résumé — it’s an **interactive showcase of my engineering capabilities**.  
+Built using **Next.js 14** and **Tailwind CSS**, this portfolio bridges **robust backend logic** with **fluid, engaging frontend design**.
+
+The site features a custom **Glassmorphism + Neon UI** with interactive elements such as **3D flip cards** for skills and **video previews** for projects — designed to leave a strong visual and technical impression.
+
+---
+
+## ✨ Key Features
+
+- **🎨 Glassmorphism UI** – Frosted glass panels with neon accents and dark-mode aesthetics  
+- **🔄 Interactive Tech Stack** – Custom **3D flip cards** with signal-strength-style proficiency indicators  
+- **🎥 Dynamic Project Previews** – Hover-based video previews instead of static images  
+- **⚡ High Performance** – Next.js App Router with SSR for speed and SEO  
+- **📱 Fully Responsive** – Seamless experience across desktop, tablet, and mobile devices  
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+|-------|-------------|
+| **Frontend Core** | `Next.js 14`, `React.js`, `TypeScript` |
+| **Styling & Animation** | `Tailwind CSS`, `Framer Motion` |
+| **Backend & Database** | `Node.js`, `Spring Boot`, `MySQL` |
+| **AI & Data Science** | `Python`, `TensorFlow`, `Pandas`, `Streamlit` |
+| **Deployment** | `Netlify` (CI/CD) |
+
+---
+
+## 🚀 Getting Started
+
+Run the project locally in a few simple steps:
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/Navi-1105/navneet-portfolio.git
+cd navneet-portfolio
+````
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📂 Project Structure
 
-## Learn More
+```bash
+.
+├── app/                  # Next.js App Router
+│   ├── page.tsx          # Landing Page (Hero, Skills, Experience)
+│   └── layout.tsx        # Global Layout & SEO
+├── components/           # Reusable UI Components
+│   ├── Navbar.tsx
+│   ├── SkillGroup.tsx    # ⚡ 3D Flip Card Logic
+│   ├── Skills.tsx        # Bento Grid Layout
+│   └── Achievements.tsx
+├── data/
+│   └── content.ts        # ✏️ Edit this to update portfolio content
+├── public/
+│   └── projects/         # Images & Video Previews
+└── tailwind.config.ts    # Theme & Animation Config
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Customization Guide
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* **Edit Content:** `data/content.ts` (bio, skills, projects, links)
+* **Add Projects:** Add media to `public/projects/` and update `content.ts`
+* **Change Theme:** Modify colors in `tailwind.config.ts`
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📬 Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+I’m currently open to **Full-Stack Developer** and **AI/ML** opportunities.
+
+* 🌐 **Portfolio:** [https://navneet-kaur-somal-portfolio.netlify.app](https://navneet-kaur-somal-portfolio.netlify.app)
+* 💼 **LinkedIn:** [https://www.linkedin.com/in/navneet-kaur-3697a6290/](https://www.linkedin.com/in/navneet-kaur-3697a6290/)
+* 🧑‍💻 **GitHub:** [https://github.com/Navi-1105](https://github.com/Navi-1105)
+
+---
+
+<p align="center">
+Built with ❤️ by <strong>Navneet Kaur</strong>
+</p>
+```
+
+---
+
+
+Just tell me 👍
