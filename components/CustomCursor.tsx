@@ -2,48 +2,80 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-type Pos = { x: number; y: number };
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CustomCursor() {
-  const [pos, setPos] = useState<Pos>({ x: 0, y: 0 });
-  const [visible, setVisible] = useState(false);
+  // 1. Motion Values for high-performance updates
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // 2. Spring Physics for the "Frosted Glass" trailer (smooth floating feel)
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+  const cursorX = useSpring(mouseX, springConfig);
+  const cursorY = useSpring(mouseY, springConfig);
+
+  const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleMove = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
-    const handleEnter = () => setVisible(true);
-    const handleLeave = () => setVisible(false);
+    const handleMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      // Reveal cursor only after user interaction
+      if (!isVisible) setIsVisible(true);
+    };
 
-    window.addEventListener('pointermove', handleMove);
-    window.addEventListener('pointerdown', handleEnter);
-    window.addEventListener('pointerenter', handleEnter);
-    window.addEventListener('pointerleave', handleLeave);
+    // 3. Logic to detect clickable/hoverable elements
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Check for common interactive elements or explicit cursor-pointer style
+      const isClickable =
+        target.tagName === 'A' ||
+        target.tagName === 'BUTTON' ||
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.closest('a') ||
+        target.closest('button') ||
+        window.getComputedStyle(target).cursor === 'pointer';
+
+      setIsHovering(!!isClickable);
+    };
+
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseover', handleMouseOver);
 
     return () => {
-      window.removeEventListener('pointermove', handleMove);
-      window.removeEventListener('pointerdown', handleEnter);
-      window.removeEventListener('pointerenter', handleEnter);
-      window.removeEventListener('pointerleave', handleLeave);
+      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, []);
+  }, [mouseX, mouseY, isVisible]);
+
+  // Hide on touch devices (where pointer is coarse) or before first move
+  if (!isVisible) return null;
 
   return (
-    <div className="custom-cursor" aria-hidden>
-      <div
+    <div className="custom-cursor fixed inset-0 pointer-events-none z-[9999] overflow-visible">
+      {/* Small White Center Dot (Direct Input) */}
+      <motion.div
         className="cursor-dot"
         style={{
-          transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
-          opacity: visible ? 1 : 0,
+          x: mouseX,
+          y: mouseY,
+          translateX: '-50%',
+          translateY: '-50%',
         }}
       />
-      <div
-        className="cursor-trailer"
+
+      {/* Large Frosted Glass Orb (Physics + Zoom) */}
+      <motion.div
+        className={`cursor-glass ${isHovering ? 'hovered' : ''}`}
         style={{
-          transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
-          opacity: visible ? 0.7 : 0,
+          x: cursorX,
+          y: cursorY,
+          translateX: '-50%',
+          translateY: '-50%',
         }}
       />
     </div>
   );
 }
-
