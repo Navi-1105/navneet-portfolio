@@ -10,6 +10,8 @@ export interface Project {
   solution?: string;
   features?: string[];
   link?: string; // GitHub or Live link
+  image: string; // Image path for project card
+  video?: string; // Optional video preview path
 }
 
 export const personalInfo = {
@@ -23,10 +25,11 @@ export const personalInfo = {
 };
 
 export const skills = {
-  "Languages": ["Java (Basics)", "Python", "SQL", "C++ (DSA)", "JavaScript"],
+  "Languages": ["Java (Basics)", "Python", "SQL", "C++ (DSA)","HTML", "CSS", "JavaScript"],
   "Frameworks": ["React.js", "Express.js", "Node.js", "Flask"],
-  "Data & AI": ["Pandas", "NumPy", "Scikit-Learn", "NLP", "Generative AI", "OCR"],
-  "Tools": ["Git", "GitHub", "Tableau", "Streamlit", "Postman", "Azure AI", "MySQL"]
+  "Data & AI": ["Pandas", "NumPy", "Scikit-Learn", "NLP", "Generative AI", "OCR","PyTorch (Basics)"],
+  "Databases": ["MySQL", "MongoDB"],
+  "Tools": ["Git", "GitHub", "Tableau", "Streamlit", "Azure AI"]
 };
 
 export const experiences = [
@@ -68,7 +71,9 @@ export const projects: Project[] = [
       "RESTful API integration for HR portals",
       "Support for multiple PDF formats"
     ],
-    link: "https://github.com/Navi-1105/"
+    link: "https://github.com/Navi-1105/",
+    image: "/projects/job-analyzer.png",
+    video: "/projects/job-analyzer.mp4"
   },
   {
     slug: "real-time-analytics-dashboard",
@@ -84,7 +89,9 @@ export const projects: Project[] = [
       "Responsive design for mobile monitoring",
       "Scalable backend architecture"
     ],
-    link: "https://github.com/Navi-1105/"
+    link: "https://github.com/Navi-1105/",
+    image: "/projects/dashboard.png",
+    video: "/projects/dashboard-demo.mp4"
   },
   {
     slug: "smart-inventory-system",
@@ -100,7 +107,9 @@ export const projects: Project[] = [
       "Role-based access control (RBAC)",
       "Automated stock level alerts"
     ],
-    link: "https://github.com/Navi-1105/"
+    link: "https://github.com/Navi-1105/",
+    image: "/projects/inventory.png",
+    video: "/projects/inventory.mp4"
   }
 ];
 

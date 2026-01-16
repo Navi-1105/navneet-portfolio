@@ -18,11 +18,23 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Performance optimization: throttle updates using requestAnimationFrame
+    let rafId: number | null = null;
+    
     const handleMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-      // Reveal cursor only after user interaction
-      if (!isVisible) setIsVisible(true);
+      // Cancel previous frame if still pending
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      
+      // Schedule update for next frame (throttles to ~60fps)
+      rafId = requestAnimationFrame(() => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+        // Reveal cursor only after user interaction
+        if (!isVisible) setIsVisible(true);
+        rafId = null;
+      });
     };
 
     // 3. Logic to detect clickable/hoverable elements
@@ -41,10 +53,13 @@ export default function CustomCursor() {
       setIsHovering(!!isClickable);
     };
 
-    window.addEventListener('mousemove', handleMove);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mousemove', handleMove, { passive: true });
+    window.addEventListener('mouseover', handleMouseOver, { passive: true });
 
     return () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
       window.removeEventListener('mousemove', handleMove);
       window.removeEventListener('mouseover', handleMouseOver);
     };

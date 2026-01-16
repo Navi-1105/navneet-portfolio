@@ -1,6 +1,7 @@
 import { projects } from '@/data/content';
-import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Github } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 // 1. Generate Static Params for SSG (Static Site Generation)
@@ -20,23 +21,23 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
   }
 
   return (
-    <main className="min-h-screen pt-32 pb-20 px-8 max-w-5xl mx-auto relative z-10 text-gray-200">
+    <main className="min-h-screen pt-32 pb-20 px-8 max-w-5xl mx-auto relative z-10 text-[var(--fg)] transition-colors duration-500">
       
       {/* Back Button */}
       <Link 
         href="/#projects" 
-        className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white/60 hover:text-accent transition-colors mb-12"
+        className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest opacity-60 hover:opacity-100 hover:text-accent transition-all mb-12"
       >
         <ArrowLeft size={16} /> Back to Projects
       </Link>
 
       {/* Header Section */}
-      <header className="mb-20">
-        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight text-white mb-8">
+      <header className="mb-16">
+        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight mb-8 text-[var(--fg)]">
           {project.title}
         </h1>
         
-        <div className="flex flex-wrap gap-4 mb-8">
+        <div className="flex flex-wrap gap-4 mb-12">
           {project.tech.map((t) => (
             <span 
               key={t} 
@@ -47,7 +48,32 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
           ))}
         </div>
 
-        <p className="text-xl md:text-2xl leading-relaxed text-gray-300 max-w-3xl border-l-4 border-accent pl-6">
+        {/* --- MEDIA SHOWCASE (Video or Image) --- */}
+        <div className="w-full rounded-3xl overflow-hidden shadow-2xl border border-[var(--card-border)] bg-black/50 mb-16 group">
+          {project.video ? (
+            <video
+              src={project.video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls
+              className="w-full h-auto object-cover"
+            />
+          ) : project.image ? (
+            <div className="relative w-full aspect-video">
+              <Image 
+                src={project.image} 
+                alt={project.title} 
+                fill 
+                className="object-cover"
+              />
+            </div>
+          ) : null}
+        </div>
+        {/* ------------------------------------------- */}
+
+        <p className="text-xl md:text-2xl leading-relaxed opacity-90 max-w-3xl border-l-4 border-accent pl-6">
           {project.longDescription}
         </p>
       </header>
@@ -56,8 +82,8 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
       <div className="grid md:grid-cols-2 gap-16 mb-20">
         {project.challenge && (
           <div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-white/50 mb-4">The Challenge</h2>
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <h2 className="text-sm font-bold uppercase tracking-widest opacity-50 mb-4">The Challenge</h2>
+            <p className="text-lg opacity-80 leading-relaxed">
               {project.challenge}
             </p>
           </div>
@@ -65,8 +91,8 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
         
         {project.solution && (
           <div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-white/50 mb-4">The Solution</h2>
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <h2 className="text-sm font-bold uppercase tracking-widest opacity-50 mb-4">The Solution</h2>
+            <p className="text-lg opacity-80 leading-relaxed">
               {project.solution}
             </p>
           </div>
@@ -75,12 +101,12 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
 
       {/* Key Features */}
       {project.features && (
-        <section className="mb-20 p-8 md:p-12 bg-white/5 rounded-3xl border border-white/10">
-          <h2 className="text-2xl font-bold text-white mb-8">Key Features</h2>
+        <section className="mb-20 p-8 md:p-12 bg-[var(--card-bg)] rounded-3xl border border-[var(--card-border)] backdrop-blur-md">
+          <h2 className="text-2xl font-bold mb-8 text-[var(--fg)]">Key Features</h2>
           <ul className="grid md:grid-cols-2 gap-4">
             {project.features.map((feature, i) => (
-              <li key={i} className="flex items-start gap-3 text-gray-300">
-                <span className="mt-1.5 w-2 h-2 rounded-full bg-accent" />
+              <li key={i} className="flex items-start gap-3 opacity-80">
+                <span className="mt-1.5 w-2 h-2 rounded-full bg-accent shrink-0" />
                 {feature}
               </li>
             ))}
@@ -95,7 +121,7 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
             href={project.link}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-accent transition-colors"
+            className="flex items-center gap-2 px-8 py-4 bg-[var(--fg)] text-[var(--bg)] font-bold rounded-full hover:bg-accent hover:text-white transition-colors"
           >
             <Github size={20} /> View Source
           </a>

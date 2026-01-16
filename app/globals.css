@@ -1,13 +1,49 @@
 @import "tailwindcss";
 
 /* =========================
-   ROOT + BASE
+   THEME VARIABLES (PREMIUM SLATE)
 ========================= */
 
 :root {
-  /* Pure deep black for high contrast */
-  --bg: #030303; 
-  --fg: #f7f5f0;
+  /* DARK MODE (Default) - Neon & Deep */
+  --bg: #020617; /* Slate-950 */
+  --fg: #f8fafc; /* Slate-50 */
+  
+  --card-bg: rgba(30, 41, 59, 0.5);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text-secondary: #94a3b8;
+
+  /* BUBBLES: Deep & Glowing */
+  --bubble-bg: rgba(0, 0, 0, 0.2);
+  --bubble-shadow-outline: rgba(255, 255, 255, 0.4);
+  --bubble-shadow-inset-1: rgba(235, 50, 200, 0.5); /* Neon Pink */
+  --bubble-shadow-inset-2: rgba(0, 255, 200, 0.5);  /* Neon Cyan */
+  --bubble-shadow-depth: rgba(0, 0, 0, 0.9);        /* Dark Core */
+  
+  --bubble-border-1: rgba(0, 255, 200, 0.9);
+  --bubble-border-2: rgba(150, 50, 255, 0.9);
+  --bubble-border-3: rgba(255, 50, 150, 0.9);
+}
+
+/* LIGHT MODE OVERRIDES - Soft & Glassy */
+:root[class="light"] {
+  --bg: #f1f5f9; /* Slate-100 */
+  --fg: #0f172a; /* Slate-900 */
+  
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-border: rgba(0, 0, 0, 0.05);
+  --text-secondary: #475569;
+
+  /* BUBBLES: Pastel & Airy */
+  --bubble-bg: rgba(255, 255, 255, 0.3); /* Frosted Glass */
+  --bubble-shadow-outline: rgba(0, 0, 0, 0.1);
+  --bubble-shadow-inset-1: rgba(192, 132, 252, 0.3); /* Soft Lavender */
+  --bubble-shadow-inset-2: rgba(103, 232, 249, 0.3); /* Soft Cyan */
+  --bubble-shadow-depth: rgba(255, 255, 255, 0.8);   /* White Reflection */
+
+  --bubble-border-1: rgba(6, 182, 212, 0.5);  /* Cyan soft */
+  --bubble-border-2: rgba(139, 92, 246, 0.5); /* Violet soft */
+  --bubble-border-3: rgba(236, 72, 153, 0.5); /* Pink soft */
 }
 
 html {
@@ -18,22 +54,28 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--fg);
-  /* INCREASED FONT SIZE (was 18px) */
-  font-size: 20px; 
+  font-size: 18px; 
   line-height: 1.6;
   cursor: none;
   overflow-x: hidden; 
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* =========================
-   BACKGROUND (Subtle Deep Glow)
+   BACKGROUND GRADIENTS
 ========================= */
 
 .wavy-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%);
+  background: radial-gradient(circle at 50% 50%, var(--bg) 0%, #000000 100%);
+  opacity: 0.8;
+}
+
+:root[class="light"] .wavy-bg {
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #cbd5e1 100%);
+  opacity: 0.6;
 }
 
 /* =========================
@@ -52,15 +94,16 @@ body {
   transform: translate(-50%, -50%);
   pointer-events: none;
   border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--bubble-bg);
   box-shadow: 
-    0 0 1px rgba(255, 255, 255, 0.4),
-    inset 20px 20px 60px rgba(235, 50, 200, 0.5),
-    inset -10px -20px 60px rgba(0, 255, 200, 0.5),
-    inset 0 0 80px rgba(0, 0, 0, 0.9);
+    0 0 1px var(--bubble-shadow-outline),
+    inset 20px 20px 60px var(--bubble-shadow-inset-1),
+    inset -10px -20px 60px var(--bubble-shadow-inset-2),
+    inset 0 0 80px var(--bubble-shadow-depth);
   backdrop-filter: blur(3px);
   animation: fluidFloat 18s ease-in-out infinite alternate;
   will-change: transform, border-radius;
+  transition: background 0.5s, box-shadow 0.5s;
 }
 
 .iridescent-bubble::before {
@@ -72,9 +115,9 @@ body {
   background: conic-gradient(
     from 180deg, 
     transparent 10%, 
-    rgba(0, 255, 200, 0.9) 30%,
-    rgba(150, 50, 255, 0.9) 60%,
-    rgba(255, 50, 150, 0.9) 80%,
+    var(--bubble-border-1) 30%,
+    var(--bubble-border-2) 60%,
+    var(--bubble-border-3) 80%,
     transparent 95%
   );
   -webkit-mask: 
@@ -87,6 +130,7 @@ body {
   mask-composite: exclude;
   filter: blur(6px); 
   opacity: 1; 
+  transition: background 0.5s;
 }
 
 .iridescent-bubble::after {
@@ -128,7 +172,6 @@ body {
   mix-blend-mode: normal; 
 }
 
-/* 1. The Sharp Center Dot */
 .cursor-dot {
   position: absolute;
   width: 8px;
@@ -139,29 +182,19 @@ body {
   z-index: 52; 
 }
 
-/* 2. The Glass Orb */
 .cursor-glass {
   position: absolute;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   z-index: 51;
-  
-  /* OPACITY SET TO 0 - Background completely transparent */
   background: rgba(255, 255, 255, 0); 
-  
-  /* Vibrant Lens Effect - Blur distorts background, Saturation boosts colors */
   backdrop-filter: blur(3px) saturate(200%); 
   -webkit-backdrop-filter: blur(3px) saturate(200%);
-  
-  /* Crisp White Border */
   border: 1px solid rgba(255, 255, 255, 0.5);
-  
-  /* Subtle Glow */
   box-shadow: 
     0 0 15px rgba(255, 255, 255, 0.1),
     inset 0 0 10px rgba(255, 255, 255, 0.05); 
-    
   transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
               height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
               background-color 0.3s ease,
@@ -170,19 +203,12 @@ body {
               backdrop-filter 0.3s ease;
 }
 
-/* 3. Zoom State (Hovering Links/Buttons) */
 .cursor-glass.hovered {
   width: 90px;
   height: 90px;
-  
-  /* Near-transparent background with slight tint on hover */
   background: rgba(255, 255, 255, 0.02); 
-  
-  /* Stronger Lens Effect on Hover - increased saturation */
   backdrop-filter: blur(4px) saturate(250%);
   -webkit-backdrop-filter: blur(4px) saturate(250%);
-  
-  /* Bright white border */
   border-color: rgba(255, 255, 255, 0.9); 
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
 }
@@ -193,7 +219,7 @@ body {
 }
 
 /* =========================
-   PREMIUM ANIMATED GRADIENTS
+   UTILITIES & GRADIENTS
 ========================= */
 
 @layer utilities {
@@ -204,34 +230,73 @@ body {
   }
 
   .text-accent {
-    color: transparent;
     background: linear-gradient(
       300deg,
-      #22d3ee, 
-      #b198ec, 
-      #c4b8c5, 
-      #7fd7e4
+      #06b6d4, 
+      #8b5cf6, 
+      #ec4899  
     );
     background-size: 300% 300%; 
     background-clip: text;
     -webkit-background-clip: text;
+    color: transparent;
     animation: gradient-flow 6s ease infinite;
-    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.3));
+    font-weight: 800;
+  }
+
+  :root[class="light"] .text-accent {
+    background: linear-gradient(
+      300deg,
+      #0891b2, 
+      #7c3aed, 
+      #db2777 
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 300% 300%; 
   }
 
   .bg-accent {
     background: linear-gradient(
       300deg,
-      rgba(34, 211, 238, 0.8), 
+      rgba(6, 182, 212, 0.8), 
       rgba(139, 92, 246, 0.8),
-      rgba(217, 70, 239, 0.8)
+      rgba(236, 72, 153, 0.8)
     );
     background-size: 300% 300%;
     animation: gradient-flow 6s ease infinite;
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
     backdrop-filter: blur(5px);
+  }
+  
+  .bg-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    filter: contrast(170%) brightness(1000%);
   }
 }
 
+/* =========================
+   3D FLIP UTILITIES
+========================= */
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}

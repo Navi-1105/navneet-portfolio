@@ -14,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="antialiased selection:bg-amber-400 selection:text-black">
         <AuroraBackground />
+        <div className="bg-noise" />
         <CustomCursor />
         {children}
       </body>
