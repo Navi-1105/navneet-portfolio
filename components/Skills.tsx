@@ -39,7 +39,7 @@ export default function Skills() {
             hasActiveCard={hasActiveCard}
             onToggle={() => setActiveCardId(activeCardId === "languages" ? null : "languages")}
             skills={[
-              { name: 'Java', icon: FaJava, color: '#e76f00', level: 3 },
+              { name: 'Java', icon: FaJava, color: '#e76f00', level: 2},
               { name: 'Python', icon: FaPython, color: '#3776ab', level: 3 },
               { name: 'C++', icon: SiCplusplus, color: '#00599c', level: 2 },
               { name: 'JavaScript', icon: FaJs, color: '#f7df1e', level: 3 },
@@ -58,7 +58,7 @@ export default function Skills() {
             skills={[
               { name: 'React', icon: FaReact, color: '#61dafb', level: 3 },
               { name: 'Node.js', icon: FaNodeJs, color: '#339933', level: 3 },
-              { name: 'Spring', icon: SiSpringboot, color: '#6db33f', level: 2 },
+              { name: 'Spring', icon: SiSpringboot, color: '#6db33f', level: 1 },
               { name: 'Express', icon: SiExpress, color: '#ffffff', level: 2 },
               { name: 'Flask', icon: SiFlask, color: '#ffffff', level: 2 },
               { name: 'MySQL', icon: SiMysql, color: '#4479a1', level: 3 },
@@ -99,8 +99,8 @@ export default function Skills() {
             skills={[
               { name: 'Azure', icon: FaMicrosoft, color: '#0078d4', level: 2 },
               { name: 'Tableau', icon: SiTableau, color: '#e97627', level: 2 },
-              { name: 'Docker', icon: FaDocker, color: '#2496ed', level: 2 },
-              { name: 'Postman', icon: SiPostman, color: '#ff6c37', level: 3 },
+              { name: 'Docker', icon: FaDocker, color: '#2496ed', level: 1 },
+              { name: 'Postman', icon: SiPostman, color: '#ff6c37', level: 1},
             ]}
           />
 
